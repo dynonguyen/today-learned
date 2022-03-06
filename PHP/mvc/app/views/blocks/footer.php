@@ -1,0 +1,2 @@
+<footer>Footer</footer>
+<hr />
