@@ -60,7 +60,6 @@ class App
         }
         $urlSplits = array_values($urlSplits);
 
-
         // Detect controller
         if (!empty($urlSplits[0])) {
             $this->controller = ucfirst($urlSplits[0]);

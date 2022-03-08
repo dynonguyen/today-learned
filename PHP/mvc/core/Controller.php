@@ -1,6 +1,8 @@
 <?php
 class Controller
 {
+    protected $data = [];
+
     public function model($modelName = '')
     {
         $pathModelFile = _DIR_ROOT . '/app/models/' . $modelName . '.php';
@@ -22,5 +24,11 @@ class Controller
         if (file_exists($viewFilePath)) {
             require_once $viewFilePath;
         }
+    }
+
+    public function setBasicData(string $viewPath, string $pageTitle = 'Title')
+    {
+        $this->data['viewPath'] = $viewPath;
+        $this->data['pageTitle'] = $pageTitle;
     }
 }
