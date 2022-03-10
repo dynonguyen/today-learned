@@ -69,6 +69,18 @@
   docker tag <image_id> <image_name>:<tag>
 ```
 
+> Xem lịch sử thao tác trên image
+
+```sh
+  docker image history <image>
+```
+
+> Thông tin chi tiết image
+
+```sh
+  docker inspect image
+```
+
 # Containers
 
 > Câu lệnh chung khởi chạy 1 container
@@ -113,6 +125,27 @@
 
   # Thoát khỏi attach terminal của container nhưng không tắt container
   # <Ctrl P> <Ctrl Q>
+```
+
+> Xem chi tiết container
+
+```sh
+  docker inspect <container>
+```
+
+> Xem thay đổi container
+
+```sh
+  docker diff <container>
+```
+
+> Xem logs và statistic
+
+```sh
+  docker logs <container>
+  docker logs --tail 10 <container>
+  docker logs -f <container>
+  docker stats <container>
 ```
 
 > Thực thi 1 lệnh trong container khi ở ngoài container
