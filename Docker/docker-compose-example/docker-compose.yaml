@@ -1,0 +1,67 @@
+version: '3'
+
+# NETWORKS
+networks:
+  www-net:
+    driver: bridge
+
+# SERVICES
+services:
+  # PHP container
+  php-service:
+    container_name: c-php
+    hostname: php
+    build:
+      dockerfile: Dockerfile
+      context: .
+    networks:
+      - www-net
+    volumes:
+      - ./www:/home/www
+      - ./php.ini-development:/usr/local/etc/php/php.ini-development
+
+  # Apache container
+  apache-service:
+    container_name: c-httpd
+    image: httpd:latest
+    hostname: httpd
+    networks:
+      - www-net
+    restart: always
+    volumes:
+      - ./www:/home/www
+      - ./httpd.conf:/usr/local/apache2/conf/httpd.conf
+    ports:
+      - 80:80
+      - 8080:80
+      - 443:443
+
+  # MySQL container
+  mysql-service:
+    container_name: c-mysql
+    image: mysql:latest
+    hostname: mysql
+    restart: always
+    networks:
+      - www-net
+    volumes:
+      - ./db:/var/lib/mysql
+      - ./my.cnf:/etc/mysql/my.cnf
+    environment:
+      - MYSQL_ROOT_PASSWORD=2504
+      - MYSQL_DATABASE=demo
+      - MYSQL_USER=user01
+      - MYSQL_PASSWORD=user01
+
+  # PHP My Admin
+  pma-service:
+    container_name: c-pma
+    image: phpmyadmin:latest
+    hostname: pma
+    restart: always
+    networks:
+      - www-net
+    ports:
+      - 3000:80
+    environment:
+      - PMA_ARBITRARY=1
