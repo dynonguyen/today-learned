@@ -29,7 +29,7 @@ services:
       - www-net
     restart: always
     volumes:
-      - ./www:/home/www
+      - ../../PHP/mvc/:/home/www
       - ./httpd.conf:/usr/local/apache2/conf/httpd.conf
     ports:
       - 80:80
