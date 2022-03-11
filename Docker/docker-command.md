@@ -34,6 +34,8 @@
   docker image rm <image>:<tag>
   # or
   docker image rm <image_id>
+  #or
+  docker rmi <image>
 ```
 
 > Vài tham số khi tạo container
