@@ -10,7 +10,7 @@
 
 > **Infrastructure as Code:** Sử dụng Dockerfile để quản lý Infrastructure.
 
-![IaC_II](./images/IaC_II.jpg)
+![IaC_II](../assets/images/IaC_II.jpg)
 
 # Dockerfile Instructions
 

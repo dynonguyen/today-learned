@@ -14,7 +14,7 @@
 
 > **VM** ảo hóa (virtualization) ở phần cứng (hardware level), còn **Docker** ảo hóa (containerization) ở tầng ứng dụng (app level).
 
-![Docker VM](./images/docker-vm.png)
+![Docker VM](../assets/images/docker-vm.png)
 
 # Cài đặt Docker trên Arch Linux
 
@@ -47,4 +47,4 @@
 
 > **Container** là một **Run-time environment** được tạo từ các Image mà ở đó người dùng có thể chạy một ứng dụng độc lập.
 
-![Image, Container](./images/image-container.jpg)
+![Image, Container](../assets/images/image-container.jpg)
