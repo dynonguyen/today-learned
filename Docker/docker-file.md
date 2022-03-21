@@ -4,7 +4,7 @@
 
 > Nó là 1 file dùng để build ra 1 **Image** tự động thông qua các dòng code trong **Dockerfile**.
 
-> **Lợi ích:** Dockerfile giúp quản lý Runtime Environment, Configuration cùng Application bằng code. Đóng gói tất cả vào 1 image. Do Image là Read-only nên việc deploy image lên các môi trường là rất ổn định.
+> **Lợi ích:** Dockerfile gilý Runtime Environment, Configuration cùng Application bằng code. Đóng gói tất cả vào 1 image. Do Image là Read-only nên việc deploy image lên các môi trường là rất ổn định.
 
 > **Immutable Infrastructure:** Phiên bản ổn định nhất, không đổi trong mọi môi trường khác nhau.
 
@@ -38,9 +38,7 @@
   ARG version
 ```
 
-## LABEL
-
-> Dùng để mô tả thêm cho image (cung cấp các meta data cho image)
+## LABEùng để mô tả thêm cho image (cung cấp các meta data cho image)
 
 ```Dockerfile
   LABEL <key>=<value> <key>=<value> <key>=<value> ...
