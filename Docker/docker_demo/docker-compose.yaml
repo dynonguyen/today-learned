@@ -1,0 +1,72 @@
+version: '3'
+
+# Networks
+
+networks:
+  www-net:
+    driver: bridge
+
+# volumes:
+#   v-code:
+#     driver_opts:
+#       type: 'none'
+#       o: 'bind'
+#       device: /home/dyno/docker_demo/code
+
+# Services
+services:
+  # MySQL
+  mysql-service:
+    image: mysql:8.0.28
+    container_name: c-mysql
+    hostname: mysql
+    networks:
+      - www-net
+    volumes:
+      - ./db:/var/lib/mysql
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+
+  # PHP My Admin
+  pma-service:
+    image: phpmyadmin:5.1.3
+    container_name: c-pma
+    hostname: pma
+    networks:
+      - www-net
+    ports:
+      - 8080:80
+    restart: always
+    environment:
+      - PMA_ARBITRARY=1
+
+  # PHP FPM
+  php-service:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    container_name: c-php
+    hostname: php
+    networks:
+      - www-net
+    volumes:
+      - ./code:/code
+
+  # Apache
+  apache-service:
+    image: httpd:2.4.53
+    container_name: c-httpd
+    networks:
+      - www-net
+    volumes:
+      - ./code:/code
+      - ./configs/httpd.conf:/usr/local/apache2/conf/httpd.conf
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    depends_on:
+      - mysql-service
+      - php-service
