@@ -1,0 +1,42 @@
+server:
+  port: ${GATEWAY_PORT:9000}
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: ${DISCOVERY_URL:http://localhost:8761/eureka}
+    instance:
+      hostname: ${INSTANCE_HOSTNAME:localhost}
+
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: '*'
+            allowedMethods:
+              - GET
+              - POST
+              - DELETE
+              - PUT
+              - PATCH
+              - OPTION
+      routes:
+        - id: user-service
+          uri: http://c-userservice
+          filters:
+            - RewritePath=/user-service,/
+          predicates:
+            - Path=/user-service/**
+
+        - id: product-service
+          uri: http://c-productservice
+          filters:
+            - RewritePath=/product-service,/
+          predicates:
+            - Path=/product-service/**

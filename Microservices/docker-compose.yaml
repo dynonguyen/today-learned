@@ -1,0 +1,113 @@
+version: '3'
+
+networks:
+  default:
+    driver: bridge
+
+services:
+  # Discovery server
+  discovery:
+    image: maven:3.8.5-openjdk-17
+    container_name: c-discovery
+    hostname: discovery
+    networks:
+      - default
+    volumes:
+      - ./discovery:/src
+      - ~/.m2:/root/.m2
+    environment:
+      - DISCOVERY_PORT=8761
+      - INSTANCE_HOSTNAME=c-discovery
+    ports:
+      - 8761:8761
+    entrypoint: ['bash', '-c', 'cd /src && mvn spring-boot:run']
+
+  # Gateway service
+  gateway:
+    image: maven:3.8.5-openjdk-17
+    container_name: c-gateway
+    hostname: gateway
+    networks:
+      - default
+    volumes:
+      - ./gateway:/src
+      - ~/.m2:/root/.m2
+    environment:
+      - DISCOVERY_URL=http://c-discovery:8761/eureka
+      - GATEWAY_PORT=80
+      - INSTANCE_HOSTNAME=c-discovery
+    ports:
+      - 9000:80
+    entrypoint: ['bash', '-c', 'cd /src && mvn spring-boot:run']
+    depends_on:
+      - discovery
+
+  ############# SERVICE API #############
+  # User service
+  user-service:
+    image: maven:3.8.5-openjdk-17
+    container_name: c-userservice
+    hostname: userserivce
+    networks:
+      - default
+    volumes:
+      - ./services/userservice:/src
+      - ~/.m2:/root/.m2
+    environment:
+      - DISCOVERY_URL=http://c-discovery:8761/eureka
+      - USERSERVICE_PORT=80
+      - INSTANCE_HOSTNAME=c-discovery
+    ports:
+      - 3000:80
+    entrypoint: ['bash', '-c', 'cd /src && mvn spring-boot:run']
+    depends_on:
+      - discovery
+
+  # Product service
+  product-service:
+    image: maven:3.8.5-openjdk-17
+    container_name: c-productservice
+    hostname: productserivce
+    networks:
+      - default
+    volumes:
+      - ./services/productservice:/src
+      - ~/.m2:/root/.m2
+    environment:
+      - DISCOVERY_URL=http://c-discovery:8761/eureka
+      - PRODUCTSERVICE_PORT=80
+      - INSTANCE_HOSTNAME=c-discovery
+    ports:
+      - 3001:80
+    entrypoint: ['bash', '-c', 'cd /src && mvn spring-boot:run']
+    depends_on:
+      - discovery
+
+  ############# SERVICE Database #############
+  user-database:
+    container_name: user-db
+    image: mysql:8.0.28
+    hostname: userdb
+    restart: always
+    networks:
+      - default
+    volumes:
+      - ./database/userservice:/var/lib/mysql
+      - ./docker-configs/my.cnf:/etc/mysql/my.cnf
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_DATABASE=users
+
+  product-database:
+    container_name: product-db
+    image: mysql:8.0.28
+    hostname: productdb
+    restart: always
+    networks:
+      - default
+    volumes:
+      - ./database/productservice:/var/lib/mysql
+      - ./docker-configs/my.cnf:/etc/mysql/my.cnf
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_DATABASE=products
