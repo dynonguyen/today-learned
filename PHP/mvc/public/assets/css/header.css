@@ -1,0 +1,39 @@
+header {
+	background-color: var(--bs-primary);
+	width: 100%;
+}
+
+nav * {
+	color: #fff;
+}
+
+.nav-wrapper {
+	height: 7.2rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-top: 6px;
+	padding-bottom: 6px;
+}
+
+nav .logo {
+	width: 5.4rem;
+}
+
+.logo-name {
+	font-size: 2.2rem;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	margin-left: 8px;
+	color: #fff;
+}
+
+.account-group span,
+.cart-group span {
+	font-size: 1.5rem;
+}
+
+.account-group i,
+.cart-group i {
+	font-size: 2.8rem;
+}

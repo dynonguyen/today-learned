@@ -1,0 +1,47 @@
+.g-5 {
+	--bs-gutter-y: 5rem;
+	--bs-gutter-x: 3.5rem;
+}
+
+.menu-item {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	padding: 2.5rem 0.5rem;
+	border-radius: 8px;
+	box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 8px,
+		rgba(17, 17, 26, 0.05) 0px 8px 16px;
+	transition: all 0.35s;
+	height: 100%;
+}
+
+.menu-item:hover {
+	background-color: #fdfdfd;
+}
+
+.menu-item:hover * {
+	color: var(--bs-primary);
+	font-weight: 500;
+}
+
+.menu-item * {
+	color: var(--app-dark);
+}
+
+.menu-item i {
+	font-size: 2.8rem;
+}
+
+.menu-item span {
+	font-size: 2rem;
+	text-align: center;
+	text-transform: capitalize;
+}
+
+@media only screen and (max-width: 576px) {
+	.g-5 {
+		--bs-gutter-y: 3rem;
+		--bs-gutter-x: 3rem;
+	}
+}

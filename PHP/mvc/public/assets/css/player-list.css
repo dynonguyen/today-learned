@@ -1,0 +1,26 @@
+.modal-title {
+	font-size: 2rem;
+	text-transform: uppercase;
+}
+
+.modal-body *,
+.modal-footer * {
+	font-size: 1.6rem;
+}
+
+.modal-dialog {
+	max-width: 776px;
+}
+
+.modal-body label {
+	color: var(--app-gray);
+}
+
+.modal-footer button {
+	text-transform: uppercase;
+}
+
+.modal-open .container-fluid,
+.modal-open .container {
+	-webkit-filter: blur(5px) grayscale(90%);
+}

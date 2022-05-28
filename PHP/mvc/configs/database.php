@@ -1,7 +1,8 @@
 <?php
+// Use PDO extension
 $config['database'] = [
     'host' => 'localhost',
     'username' => 'root',
-    'password' => '2504',
-    'db' => 'demo'
+    'password' =>  'root',
+    'db' => 'footballdb'
 ];

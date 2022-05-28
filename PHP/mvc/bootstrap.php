@@ -1,5 +1,5 @@
-<!-- Nhúng các file config để load trang web -->
 <?php
+//  Embed config files to load web pages
 define('_DIR_ROOT', __DIR__);
 
 // Load config
@@ -15,10 +15,12 @@ if (!empty($config_files)) {
 // Load App
 require_once 'app/App.php';
 
-// Check db connection
-require_once 'core/Connection.php';
-
 // Load Core Class
 require_once 'core/Controller.php';
 require_once 'core/Route.php';
+require_once 'core/MySQLConnection.php';
 require_once 'core/Model.php';
+require_once 'core/traits/GetterSetter.php';
+
+// Load utils
+require_once 'utils/constants.php';

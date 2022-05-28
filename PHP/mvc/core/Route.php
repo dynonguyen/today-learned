@@ -1,6 +1,7 @@
 <?php
 class Route
 {
+    // Phân tích chuyển từ virtual url => real url
     public function handleRoute($url = '')
     {
         global $routes;

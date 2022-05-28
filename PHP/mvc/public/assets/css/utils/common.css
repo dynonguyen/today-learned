@@ -1,0 +1,56 @@
+html,
+body {
+	font-size: 62.5%;
+	width: 100%;
+	overflow-x: hidden;
+}
+
+:root {
+	--app-dark: #151522;
+	--app-dark-gray: #333;
+	--app-gray: #888;
+	--app-light-gray: #ccc;
+	--app-light: #eee;
+}
+
+/* Scroll bar */
+::-webkit-scrollbar {
+	width: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--app-gray);
+}
+
+.app-wrapper {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+.app-wrapper main {
+	flex-grow: 1;
+}
+
+ul {
+	padding: 0;
+}
+
+li {
+	list-style: none;
+}
+
+a:hover {
+	color: var(--bs-info);
+}
+
+@media only screen and (max-width: 375px) {
+	html,
+	body {
+		font-size: 50%;
+	}
+}
